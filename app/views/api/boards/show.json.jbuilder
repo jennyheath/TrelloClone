@@ -2,3 +2,6 @@
 # it should include the board
 #  - its lists
 #    - the cards for each list
+# json.(@board, :lists)
+
+# json.(@board.lists).each
