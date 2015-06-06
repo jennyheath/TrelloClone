@@ -2,6 +2,12 @@
 # it should include the board
 #  - its lists
 #    - the cards for each list
-# json.(@board, :lists)
 
-# json.(@board.lists).each
+
+json.extract! @board, :title, :id
+
+json.lists do
+  json.array! @board.lists do |list|
+    json.extract! list, :title, :id
+  end
+end
