@@ -17,25 +17,45 @@
 @import "bootstrap";
 @import "font-awesome";
 
+#main {
+  position: relative;
+}
+
 .board, .list {
   display: block;
   float: left;
-  width: 150px;
-  height: 120px;
+  background-color: #ccc;
+  width: 200px;
+  height: 500px;
   border: 1px solid #ccc;
   margin: 10px;
 }
 
-// .list-text {
-//   display: block;
-//   float: left;
-//   width: auto;
-//   height: auto;
-//   padding: 10px;
-// }
+.card {
+  border: 1px solid black;
+  margin: auto;
+}
+
+.new-board {
+  display: block;
+  // position: absolute;
+}
+
+.card-form {
+  display: block;
+  border: 2px solid black;
+}
 
 .group:after {
   content: "";
   display: block;
   clear: both;
+}
+
+.delete-card {
+  display: none;
+}
+
+.card:hover > .delete-card {
+  display: block;
 }
