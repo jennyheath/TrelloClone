@@ -9,7 +9,7 @@ TrelloClone.Views.BoardsIndex = Backbone.View.extend({
   formTemplate: JST['boards/boards_form'],
 
   initialize: function (options) {
-    this.collection = options.collection;
+    this.boards = this.collection;
     this.listenTo(this.collection, 'sync', this.render);
   },
 
@@ -23,9 +23,9 @@ TrelloClone.Views.BoardsIndex = Backbone.View.extend({
     });
     this.$el.html(content);
 
-    this.collection.each(function (board) {
+    this.boards.each(function (board) {
       var boardView = new TrelloClone.Views.BoardsIndexItem({
-        board: board
+        model: board
       });
       this.$('.boards-list').append(boardView.render().$el);
     }.bind(this));
@@ -49,8 +49,7 @@ TrelloClone.Views.BoardsIndex = Backbone.View.extend({
     board.save(attrs, {
       wait: true,
       success: function () {
-        this.collection.add(board);
-        // Backbone.history.navigate("/boards/" + this.model.id, { trigger: true });
+        this.boards.add(board);
       }.bind(this)
     });
   }

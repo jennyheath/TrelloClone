@@ -5,6 +5,7 @@ TrelloClone.Views.ListNew = Backbone.View.extend({
 
   initialize: function (options) {
     this.boardView = options.boardView;
+    this.lists = this.collection;
   },
 
   template: JST['lists/lists_form'],
@@ -22,17 +23,16 @@ TrelloClone.Views.ListNew = Backbone.View.extend({
     event.preventDefault();
     var $target = $(event.currentTarget).serializeJSON();
     var attrs = $target.list;
-    // $target.list.board_id = this.model.id;
+    $target.list.board_id = this.model.id;
+    var view = this;
 
     var list = new TrelloClone.Models.List();
     list.save(attrs, {
       wait: true,
       success: function () {
-        this.collection.add(this.model, { trigger: true });
-        this.model.fetch();
-        // this.boardView.render();
-        // Backbone.history.navigate("/boards/" + this.model.id, { trigger: true });
-      }.bind(this)
+        view.lists.add(list, { trigger: true });
+        view.render();
+      }
     });
   }
 });

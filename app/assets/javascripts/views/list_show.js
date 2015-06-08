@@ -1,8 +1,23 @@
-TrelloClone.Views.ListView = Backbone.View.extend({
+TrelloClone.Views.ListShow = Backbone.View.extend({
   template: JST['lists/list_show'],
 
   initialize: function () {
-    // this.listenTo(this.model.collection, 'add', this.render);
+    this.listenTo(this.model, 'sync', this.render);
+  },
+
+  events: {
+    'click .delete': 'destroyList'
+  },
+
+  destroyList: function (event) {
+    event.preventDefault();
+    var view = this;
+
+    this.model.destroy({
+      success: function () {
+        view.remove();
+      }
+    });
   },
 
   render: function () {
