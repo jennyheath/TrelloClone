@@ -1,6 +1,10 @@
 TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
   template: JST['boards/board_show'],
 
+  events: {
+    'sortupdate': 'updateOrd'
+  },
+
   initialize: function (options) {
     this.lists = this.model.lists();
 
@@ -16,6 +20,7 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
       model: list
     });
     this.addSubview('.lists-list', subview);
+    console.log(list.get('ord'));
   },
 
   addListNewView: function () {
@@ -33,8 +38,31 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
     this.$el.html(content);
     this.attachSubviews();
     $(".sortable").sortable();
-    // $( ".sortable" ).disableSelection();
 
     return this;
+  },
+
+  updateOrd: function (event) {
+    var view = this;
+    var $target = $(event.target);
+
+    if ($target.attr('class') === "lists-list row sortable ui-sortable") {
+      $target.children().each(function (i, list) {
+        var listId = $(list).data('id');
+        var listModel = view.lists.get(listId);
+        listModel.set('ord', i);
+        listModel.save();
+      });
+    } else {
+      $target.children().each(function (i, card) {
+        var cardId = $(card).data('id');
+        var listId = $target.parent().parent().data('id');
+        var listModel = view.lists.get(listId);
+        var cardModel = listModel.cards().get(cardId);
+
+        cardModel.set('ord', i);
+        cardModel.save();
+      });
+    }
   }
 });

@@ -8,13 +8,13 @@ json.extract! @board, :title, :id
 
 json.lists do
   json.array! @board.lists do |list|
-    json.extract! list, :title, :id
+    json.extract! list, :title, :id, :ord
 
     json.cards do
       json.array! list.cards do |card|
         json.extract! card, :id, :title, :description
       end
     end
-    
+
   end
 end
