@@ -17,23 +17,29 @@
 @import "bootstrap";
 @import "font-awesome";
 
-#main {
-  position: relative;
-}
-
 .board, .list {
   display: block;
   float: left;
-  background-color: #ccc;
+  background-color: #D6EFEF;
   width: 200px;
-  height: 500px;
-  border: 1px solid #ccc;
+  border: 1px solid #2c3e50;
+  border-radius: 12px;
   margin: 10px;
+  text-align: center;
+}
+
+.board {
+  height: 200px;
+}
+
+.list {
+  height: 500px;
 }
 
 .card {
-  border: 1px solid black;
   margin: auto;
+  border: 1px solid #2c3e50;
+  border-radius: 12px;
 }
 
 .new-board {
@@ -43,7 +49,8 @@
 
 .card-form {
   display: block;
-  border: 2px solid black;
+  background-color: #82CDCD;
+  padding: 10px;
 }
 
 .group:after {
@@ -58,4 +65,11 @@
 
 .card:hover > .delete-card {
   display: block;
+  margin: auto;
+  // float: left;
+  background-color: #FF3333;
+}
+
+.delete-list {
+  background-color: #FF3333;
 }

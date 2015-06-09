@@ -32,6 +32,8 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
     this.attachSubviews();
+    $(".sortable").sortable();
+    // $( ".sortable" ).disableSelection();
 
     return this;
   }
