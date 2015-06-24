@@ -1,0 +1,2 @@
+##Trello Clone
+Clone of Trello allows users to create boards, lists, and cards, and to drag cards and lists to be in a different order. Back-end built with Rails, front-end built with Backbone, and styling with Bootstrap.
