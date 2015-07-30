@@ -1,0 +1,1 @@
+window.TrelloClone={Models:{},Collections:{},Views:{},Routers:{},initialize:function(){var o=new TrelloClone.Collections.Boards;o.fetch();new TrelloClone.Routers.Router({$rootEl:$("#main"),collection:o});Backbone.history.start()}},$(document).ready(function(){TrelloClone.initialize()});

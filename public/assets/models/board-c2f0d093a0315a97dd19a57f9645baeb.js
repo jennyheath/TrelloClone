@@ -1,0 +1,1 @@
+TrelloClone.Models.Board=Backbone.Model.extend({urlRoot:"api/boards",lists:function(){return this._lists=this._lists||new TrelloClone.Collections.Lists,this._lists},parse:function(s){return s.lists&&(this.lists().set(s.lists,{parse:!0}),delete s.lists),s}});

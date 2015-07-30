@@ -1,0 +1,1 @@
+TrelloClone.Views.BoardsIndexItem=Backbone.View.extend({template:JST["boards/boards_index_item"],events:{"click .delete":"destroyBoard"},destroyBoard:function(e){e.preventDefault();var t=this;this.model.destroy({success:function(){t.remove()}})},render:function(){var e=this.template({board:this.model});return this.$el.html(e),this}});

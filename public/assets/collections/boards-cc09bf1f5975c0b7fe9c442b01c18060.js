@@ -1,0 +1,1 @@
+TrelloClone.Collections.Boards=Backbone.Collection.extend({model:TrelloClone.Models.Board,url:"api/boards",getOrFetch:function(e){var o=this.get(e);return o?o.fetch():(o=new TrelloClone.Models.Board({id:e}),o.fetch({success:function(){this.add(o)}.bind(this)})),o}});

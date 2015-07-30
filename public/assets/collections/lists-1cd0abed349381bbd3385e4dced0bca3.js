@@ -1,0 +1,1 @@
+TrelloClone.Collections.Lists=Backbone.Collection.extend({model:TrelloClone.Models.List,url:"/api/lists",comparator:function(o){return-o.get("ord")}});
