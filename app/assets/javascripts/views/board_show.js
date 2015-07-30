@@ -20,7 +20,7 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
       model: list
     });
     this.addSubview('.lists-list', subview);
-    console.log(list.get('ord'));
+    // console.log(list.get('ord'));
   },
 
   addListNewView: function () {
@@ -36,6 +36,20 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
       board: this.model
     });
     this.$el.html(content);
+
+    var $lists = this.subviews();
+    $lists.sort(function (a,b) {
+      var an = a.getAttribute('ord'),
+      bn = b.getAttribute('ord');
+      if(an > bn) {
+        return 1;
+      }
+      if(an < bn) {
+        return -1;
+      }
+      return 0;
+    });
+
     this.attachSubviews();
     $(".sortable").sortable();
 
@@ -51,18 +65,13 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
         var listId = $(list).data('id');
         var listModel = view.lists.get(listId);
         listModel.set('ord', i);
-        listModel.save();
+        listModel.save({
+          success: function () {
+            view.render();
+          }
+        });
       });
-    } else {
-      $target.children().each(function (i, card) {
-        var cardId = $(card).data('id');
-        var listId = $target.parent().parent().data('id');
-        var listModel = view.lists.get(listId);
-        var cardModel = listModel.cards().get(cardId);
-
-        cardModel.set('ord', i);
-        cardModel.save();
-      });
+      window.location.reload();
     }
   }
 });

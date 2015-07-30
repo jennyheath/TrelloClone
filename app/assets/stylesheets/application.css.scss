@@ -17,6 +17,10 @@
 @import "bootstrap";
 @import "font-awesome";
 
+.backdrop {
+  margin-left: 50px;
+}
+
 .board, .list {
   display: block;
   float: left;
@@ -33,13 +37,16 @@
 }
 
 .list {
-  height: 500px;
+  height: 100%;
 }
 
 .card {
-  margin: auto;
+  margin: 5px;
   border: 1px solid #2c3e50;
+  background-color: #D6EFEF;
   border-radius: 12px;
+  padding: 10px;
+  box-shadow: 10px 10px 5px grey;
 }
 
 .new-board {
@@ -51,6 +58,7 @@
   display: block;
   background-color: #82CDCD;
   padding: 10px;
+  border-radius: 12px;
 }
 
 .group:after {
@@ -63,6 +71,16 @@
   display: none;
 }
 
+.delete {
+  display: none;
+  margin-left: 25%;
+}
+
+
+.board:hover > .delete {
+  display: block;
+}
+
 .card:hover > .delete-card {
   display: block;
   margin: auto;
@@ -72,4 +90,16 @@
 
 .delete-list {
   background-color: #FF3333;
+  display: none;
+  margin-left: 25%;
+}
+
+.list-content:hover > .delete-list {
+  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.new-session {
+  margin-left: 50px;
 }

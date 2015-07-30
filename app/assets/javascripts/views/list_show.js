@@ -17,7 +17,8 @@ TrelloClone.Views.ListShow = Backbone.CompositeView.extend({
   },
 
   events: {
-    'click .delete-list': 'destroyList'
+    'click .delete-list': 'destroyList',
+    'sortupdate': 'updateCardOrd'
   },
 
   addCardShow: function (card) {
@@ -55,5 +56,27 @@ TrelloClone.Views.ListShow = Backbone.CompositeView.extend({
     this.attachSubviews();
 
     return this;
+  },
+
+  updateCardOrd: function (event) {
+    var view = this;
+    var $target = $(event.target);
+
+    if ($target.attr('class') === "cards sortable ui-sortable") {
+      $target.children().each(function (i, card) {
+        if (card.children[0].className == "card") {
+          var cardId = $(card).data('id');
+          var cardModel = view.model.cards().get(cardId);
+
+          cardModel.set('ord', i);
+          cardModel.save({
+            success: function () {
+              view.render();
+            }
+          });
+        }
+      });
+    }
+    // window.location.reload();
   }
 });
