@@ -2,7 +2,8 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
   template: JST['boards/board_show'],
 
   events: {
-    'sortupdate': 'updateOrd'
+    'sortupdate': 'updateOrd',
+    'addListNewView': 'updateOrd'
   },
 
   initialize: function (options) {
@@ -20,7 +21,6 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
       model: list
     });
     this.addSubview('.lists-list', subview);
-    // console.log(list.get('ord'));
   },
 
   addListNewView: function () {
@@ -37,22 +37,29 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
 
-    var $lists = this.subviews();
-    $lists.sort(function (a,b) {
-      var an = a.getAttribute('ord'),
-      bn = b.getAttribute('ord');
-      if(an > bn) {
-        return 1;
-      }
-      if(an < bn) {
-        return -1;
-      }
+    // var $lists = this.subviews();
+    // $lists.sort(function (a,b) {
+    //   var an = a.getAttribute('ord'),
+    //   bn = b.getAttribute('ord');
+    //   if(an > bn) { return 1; }
+    //   if(an < bn) { return -1; }
+    //   return 0;
+    // });
+    this.attachSubviews();
+    var listEls = $('.list');
+    $('.list').remove();
+    listEls.sort(function (a,b) {
+      var an = a.getAttribute('data-ord'),
+      bn = b.getAttribute('data-ord');
+      if(an > bn) { return 1; }
+      if(an < bn) { return -1; }
       return 0;
     });
+    listEls.each(function (i, listEl) {
+      $('.lists-list').append(listEl);
+    });
 
-    this.attachSubviews();
     $(".sortable").sortable();
-
     return this;
   },
 
@@ -64,14 +71,13 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
       $target.children().each(function (i, list) {
         var listId = $(list).data('id');
         var listModel = view.lists.get(listId);
-        listModel.set('ord', i);
-        listModel.save({
+        listModel.save('ord', i, {
           success: function () {
-            view.render();
+            console.log("saved order");
+            console.log("id: " + listId + " ord: " + i);
           }
         });
       });
-      window.location.reload();
     }
   }
 });
