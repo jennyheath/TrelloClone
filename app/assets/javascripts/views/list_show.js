@@ -4,7 +4,8 @@ TrelloClone.Views.ListShow = Backbone.CompositeView.extend({
   template: JST['lists/list_show'],
 
   events: {
-    'sortupdate': 'updateCardOrd'
+    'sortupdate': 'updateCardOrd',
+    'click .delete-list': 'destroyList'
   },
 
   initialize: function () {
@@ -35,6 +36,19 @@ TrelloClone.Views.ListShow = Backbone.CompositeView.extend({
     this.addSubview('.cards', subview);
   },
 
+  destroyList: function (event) {
+    event.preventDefault();
+    // var listEl = event.target;
+    // var modelId = listEl.getAttribute('data-id');
+    // var model = this.lists.get(modelId);
+    var view = this;
+    this.model.destroy({
+      success: function () {
+        view.remove();
+      }
+    });
+  },
+
   render: function () {
     var content = this.template({
       list: this.model
@@ -56,19 +70,14 @@ TrelloClone.Views.ListShow = Backbone.CompositeView.extend({
         if (card.children[0].className == "card") {
           var cardId = $(card).data('id');
           var cardModel = view.model.cards().get(cardId);
-
-          // cardModel.set('ord', i);
           cardModel.save("ord", i, {
             success: function () {
               console.log("card ord saved");
-              $('.cards').sortable();
-              // view.render();
-              // cardModel.trigger('renderCard');
+              console.log("id: " + listId + " ord: " + i);
             }
           });
         }
       });
     }
-    // window.location.reload();
   }
 });

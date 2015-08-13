@@ -3,9 +3,28 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
 
   events: {
     'sortupdate': 'updateOrd',
-    'addListNewView': 'updateOrd',
-    'click .delete-list': 'destroyList'
+    'addListNewView': 'updateOrd'
+    // 'click .delete-list': 'destroyList',
+    // 'click .new-card': 'submit'
   },
+
+  // submit: function (event) {
+  //   event.preventDefault();
+  //   var $target = $(event.currentTarget).serializeJSON();
+  //   var attrs = $target.card;
+  //   var cards = this.model.cards();
+  //
+  //   $target.card.list_id = this.model.id;
+  //   var view = this;
+  //
+  //   var card = new TrelloClone.Models.Card();
+  //   card.save(attrs, {
+  //     success: function () {
+  //       cards.add(card, { trigger: true });
+  //       view.render();
+  //     }
+  //   });
+  // },
 
   initialize: function (options) {
     this.lists = this.model.lists();
@@ -17,17 +36,17 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
     this.addListNewView();
   },
 
-  destroyList: function (event) {
-    event.preventDefault();
-    var listEl = event.target.parentElement.parentElement;
-    var modelId = listEl.getAttribute('data-id');
-    var model = this.lists.get(modelId);
-    model.destroy({
-      success: function () {
-        listEl.remove();
-      }
-    });
-  },
+  // destroyList: function (event) {
+  //   event.preventDefault();
+  //   var listEl = event.target.parentElement.parentElement;
+  //   var modelId = listEl.getAttribute('data-id');
+  //   var model = this.lists.get(modelId);
+  //   model.destroy({
+  //     success: function () {
+  //       listEl.remove();
+  //     }
+  //   });
+  // },
 
   addListShow: function (list) {
     var subview = new TrelloClone.Views.ListShow({
@@ -50,19 +69,21 @@ TrelloClone.Views.BoardShow = Backbone.CompositeView.extend({
     });
     this.$el.html(content);
 
+    var $lists = this.subviews();
+    // debugger;
     this.attachSubviews();
-    var listEls = $('.list');
-    $('.list').remove();
-    listEls.sort(function (a,b) {
-      var an = a.getAttribute('data-ord'),
-      bn = b.getAttribute('data-ord');
-      if(an > bn) { return 1; }
-      if(an < bn) { return -1; }
-      return 0;
-    });
-    listEls.each(function (i, listEl) {
-      $('.lists-list').append(listEl);
-    });
+    // var listEls = $('.list');
+    // $('.list').remove();
+    // listEls.sort(function (a,b) {
+    //   var an = a.getAttribute('data-ord'),
+    //   bn = b.getAttribute('data-ord');
+    //   if(an > bn) { return 1; }
+    //   if(an < bn) { return -1; }
+    //   return 0;
+    // });
+    // listEls.each(function (i, listEl) {
+    //   $('.lists-list').append(listEl);
+    // });
 
     $(".sortable").sortable();
     return this;
