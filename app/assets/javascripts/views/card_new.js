@@ -24,7 +24,6 @@ TrelloClone.Views.CardNewView = Backbone.View.extend({
     var card = new TrelloClone.Models.Card();
     card.save(attrs, {
       success: function () {
-        // debugger;
         cards.add(card, { trigger: true });
         view.render();
       }
