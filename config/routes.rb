@@ -1,5 +1,6 @@
 TrelloClone::Application.routes.draw do
   root to: 'static_pages#root'
+  get 'sessions/guest_login' => 'sessions#guest_login', as: :guest_login_url
 
   resources :users
   resource :session

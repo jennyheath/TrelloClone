@@ -33,7 +33,7 @@ TrelloClone.Views.ListShow = Backbone.CompositeView.extend({
     var subview = new TrelloClone.Views.CardNewView({
       model: this.list
     });
-    this.addSubview('.cards', subview);
+    this.addSubview('.card-form-box', subview);
   },
 
   destroyList: function (event) {
@@ -65,7 +65,6 @@ TrelloClone.Views.ListShow = Backbone.CompositeView.extend({
       });
     }
     this.attachSubviews();
-
     return this;
   },
 
