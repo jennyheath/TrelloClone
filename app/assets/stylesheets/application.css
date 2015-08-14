@@ -15,7 +15,10 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-/*@import "font-awesome";*/
+
+a {
+  color: #000 !important;
+}
 
 .backdrop {
   margin-left: 50px;
@@ -24,10 +27,10 @@
 .board, .list {
   display: block;
   float: left;
-  background-color: #D6EFEF;
+  border-radius: 6px;
+  background-color: #eee;
   width: 200px;
-  border: 1px solid #2c3e50;
-  border-radius: 12px;
+  border: 1px solid #cccccc;
   margin: 10px;
   text-align: center;
 }
@@ -36,17 +39,26 @@
   height: 200px;
 }
 
+.board:hover {
+  background-color: #dbdbdb;
+}
+
 .list {
   height: 100%;
 }
 
 .card {
   margin: 5px;
-  border: 1px solid #2c3e50;
-  background-color: #D6EFEF;
-  border-radius: 12px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  background-color: #eee;
   padding: 10px;
   box-shadow: 10px 10px 5px grey;
+}
+
+.card-title {
+  font-size: 18px;
+  color: #000;
 }
 
 .new-board {
@@ -56,9 +68,13 @@
 
 .card-form {
   display: block;
-  background-color: #82CDCD;
+  background-color: transparent;
   padding: 10px;
-  border-radius: 12px;
+  text-align: left;
+}
+
+.container.container-fluid {
+  width: 100%;
 }
 
 .group:after {
@@ -68,40 +84,92 @@
 }
 
 .delete-card {
-  display: none;
+  display: block;
+  float: right;
+  background-color: transparent;
+  border: none;
+  margin-left: 140px;
+  margin-bottom: 5px;
+  color: #cccccc;
+}
+
+.delete-card:hover {
+  color: #000;
 }
 
 .delete {
-  /*display: none;*/
-  margin-left: 25%;
+  margin-top: 95px;
 }
 
-
-.board:hover > .delete {
+.delete:hover {
+  background-color: #cccccc;
+  border: 1px solid #5a5a5a;
+}
+/*.board:hover > .delete {
   display: block;
-}
+}*/
 
-.card:hover > .delete-card {
+/*.card:hover > .delete-card {
   display: block;
   margin: auto;
-  // float: left;
   background-color: #FF3333;
-}
+}*/
 
 .delete-list {
-  background-color: #FF3333;
-  /*display: none;*/
-  display: block;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 25%;
-  z-index: 100;
+  float: right;
+  margin-left: 150px;
+  margin-right: 10px;
+  background-color: transparent;
+  border: none;
+  color: #cccccc;
 }
 
-/*
-.list-content:hover > .delete-list {
-}*/
+.navbar.navbar-default {
+  border-radius: 0px;
+  background-color: #eee;
+}
+
+a.navbar-brand {
+  color: #000 !important;
+  margin-left: 10px !important;
+  font-family: "Pacifico", sans-serif;
+}
+
+.navbar-btn {
+  background-color: #e2e2e2 !important;
+  border: none !important;
+  color: #000 !important;
+}
+
+.navbar-btn:hover {
+  background-color: #cccccc !important;
+}
 
 .new-session {
   margin-left: 50px;
+}
+
+.nav-link:hover > a {
+  color: #cccccc !important;
+}
+
+.sign-in-submit, .user-submit {
+  background-color: #eee !important;
+  border: 1px solid #cccccc !important;
+  color: #000 !important;
+  margin-top: 5px !important;
+  border-radius: 25px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.sign-in-submit:hover, .user-submit:hover {
+  background-color: #cccccc !important;
+}
+
+.guest-login-button {
+  margin-left: 50px;
+  margin-top: 10px;
 }

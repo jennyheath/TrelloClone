@@ -1,7 +1,7 @@
-<div class="board group">
-  <a href="#/boards/<%= board.id %>">
-    <h4><%= board.escape('title') %></h4>
-  </a>
-  <br>
-  <button class="delete">Delete Board</button>
-</div>
+<a href="#/boards/<%= board.id %>">
+  <div class="board group">
+      <h4><%= board.escape('title') %></h4>
+    <br>
+    <button class="delete">Delete Board</button>
+  </div>
+</a>
